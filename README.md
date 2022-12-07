@@ -146,16 +146,11 @@ Statistical (option -s) analysis of experimental data:
         ## CONVERGENCE OF THE NORMALITY TESTS
         
         All the normality tests are convergent: the sample seems issued from a Normal distributed population
-        This is certainly clear with the graph of the data fitted to a Normal law:PrevusDansArticle/Aguilera_et_al_2017.fittingNormal.pdf and the QQ-plot representationPrevusDansArticle/Aguilera_et_al_2017.qqplot.pdf
+        This is certainly clear with the graph of the data fitted to a Normal law: Aguilera_et_al_2017_fittingNormal.pdf and the QQ-plot Aguilera_et_al_2017.qqplot.pdf
+        
         COMPUTING THE CORRESPONDING RISK FOR 62 SAMPLES ... 
         
-        #####################################  ApaOxIS ###################################################
-                  MC simulation of evolution of δ18O in apatite during diagenesis
-                               C. Lécuyer & JP. Flandrois 2021
-        <reference of the paper>
-        <reference of the program repository>
-        
-        ###################################  RESULTS  ###################################################
+        #####################################  Risk Analysis results  ###################################################
         (you may copy the results to any place as csv)
         
         Nb_Samples;Risk_Level %;std
