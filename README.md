@@ -88,14 +88,101 @@ ApaOxIRA enables:
 ``python3.11 ApaOxIRA.py -x parameters.yaml resultsFiles``
 
 * parameters.yaml a file containing the parameters of the model and some concerning the computer
-* here "resultsFile", is a table linking the number of samples to the risk of over-interpretation.
+* here "resultsFile", contains a table (as csv) linking the number of samples to the risk of over-interpretation:
+        
+        Nb_Samples;Risk_Level %;std
+        50 ; 41.3 ; 0.114 
+        ...
+        90 ; 7.79 ; 0.0595 
+        
+* There is also a graphical output.
 
 #### Analysis of experimental data
-
+Statistical (option -s) analysis of experimental data: 
 ``python3.11 ApaOxIRA.py -s sampleData.txt resultsName ``
 
 * "sampleData.txt" = one column table of apatite δ18O values
 * the outputs are files prefixed by the "resultName".
+    * Basic statistics (mean, variance, skew and kurtosis) are computed for a table of data (δ18O, one column only). 
+    * The normality tests (Shapiro-Wilk, Anderson-Darling) are used and a joined normality test is computed that enable us to detect or reject normality. 
+    * The interpretation criteria being that of the MC simulation parameters, the results may be compared to the MC simulation. MC simulation performed for the given number of samples and basic parameters give us the _risk_ of getting a normal distributed population by chance after diagenesis. 
+    * Additionaly an histogram, the adjusted Normal law and the quantile-quantile plot is also returned.
+    
+##### Typical result file
+    
+        ###################################  RESULTS  ###################################################
+        
+        for the submitted sample: Aguilera_et_al_2017.txt 
+        
+        #################################################################################################
+        
+        ## BASIC STATISTICS
+        
+        * Number of samples:  62 
+         * Mean: 19.756 
+         * Variance: 0.177 
+         
+         ---- 
+         * Skew: 0.184 test statistics z-score: 0.646 p-value: 0.518  H0 (skew from a normal distrib.) cannot be rejected 
+            **  The data are moderately skewed !
+         ---- 
+         * Kurtosis -0.075 test: z-score: 0.940 p-value: 0.518 H0 (normal distrib.) cannot be rejected
+            **  The distribution is moderately flat !!
+        
+        ## NORMALITY TESTS 
+        
+        [The null hypothesis HO is that the observed distribution follows the Normal (gaussian) model
+        i.e the sample was drawn from a normal distribution]
+        
+        Departure from normality due to skewness or kurtosis is more taken into account with the Shapiro-Wilk (SW) test,
+        the Aderson-Darling (AD) test is much sensitive to tail.
+                        
+        Shapiro-Wilk
+             statistics: 0.986 p-value: 0.679 H0 (normal distrib.) cannot be rejected 
+                         
+        Anderson-Darling
+             statistics: 0.287 critical value α: 0.744 H0 (normal distrib.) cannot be rejected 
+         
+        ## CONVERGENCE OF THE NORMALITY TESTS
+        
+        All the normality tests are convergent: the sample seems issued from a Normal distributed population
+        This is certainly clear with the graph of the data fitted to a Normal law:PrevusDansArticle/Aguilera_et_al_2017.fittingNormal.pdf and the QQ-plot representationPrevusDansArticle/Aguilera_et_al_2017.qqplot.pdf
+        COMPUTING THE CORRESPONDING RISK FOR 62 SAMPLES ... 
+        
+        #####################################  ApaOxIS ###################################################
+                  MC simulation of evolution of δ18O in apatite during diagenesis
+                               C. Lécuyer & JP. Flandrois 2021
+        <reference of the paper>
+        <reference of the program repository>
+        
+        ###################################  RESULTS  ###################################################
+        (you may copy the results to any place as csv)
+        
+        Nb_Samples;Risk_Level %;std
+        62 ; 4.15 ; 0.0421 
+        
+        
+        
+        ############################# PARAMETERS OF THE  MC SIMULATION ##################################
+        
+        * General conditions *
+        Number of simulations : 250000
+        Admittted risk for p value :0.05
+        
+        * Primary MC simulation *Temperature :15
+        Initial δ18O Water: -8.0
+        Initial δ18O Apatite: 20.0
+        A/W ratio range: 0.05-0.95
+        Number of samples: 100
+        
+        Simulation of the lab process, sigma: 0.05
+        
+        The adapted number of simulated conditions were: 280000 and computing was done on 14 threads in parallel
+        Time to results : 5.19 seconds
+        #################################################################################################
+    
+         
+
 
 ### Language
 ApaOxIS is written in python3 and that the optimal version of python is > 3.10: python3.11 is 10% more rapid than python3.10 here!
@@ -114,8 +201,4 @@ Finaly each subarray representing a sample set of lenth n of δ18OAf values is s
 
 The whole simulation is done iteratively with increasing values for the length of the sets with given limits for the exploration and the parameters described in a file using the yaml format.   
                          
-Statistical (option -s) analysis of experimental data: 
-    * Basic statistics (mean, variance, skew and kurtosis) are computed for a table of data (δ18O, one column only). 
-    * The normality tests (Shapiro-Wilk, Anderson-Darling) are used and a joined normality test is computed that enable us to detect or reject normality. 
-    * The interpretation criteria being that of the MC simulation parameters, the results may be compared to the MC simulation. MC simulation performed for the given number of samples and basic parameters give us the _risk_ of getting a normal distributed population by chance after diagenesis. 
-    * Additionaly an histogram, the adjusted Normal law and the quantile-quantile plot is also returned. 
+
