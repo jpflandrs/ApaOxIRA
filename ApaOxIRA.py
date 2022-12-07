@@ -7,7 +7,7 @@ of the alteration of the original oxygen isotope composition of biogenic apatite
 
                     JP Flandrois* and C Lecuyer**
                             2023  mk03
-
+Licence Cecil 2.1
 * Author and maintainer
 ** Equations and solution
 
