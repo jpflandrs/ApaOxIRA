@@ -21,7 +21,7 @@ christophe.lecuyer@univ-lyon1.fr
 Original idea and design, equations
 
 ## User Licence
-The program is made available under the [CECIL2.1](http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt) licence.
+The program is made available under the [CeCILL2.1](http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt) licence.
 
 ## Rapid description
 
