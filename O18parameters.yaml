@@ -22,7 +22,7 @@
 
 ### Description of the usage:
 
-# ApaOxIS [-h] [-r | -x | -s ] i o
+# ApaOxIRA [-h] [-r | -x | -s ] i o
 
 # positional arguments:
 #  i                  parameter file (yaml file, WARNING: structure is mandatory) OR user data
