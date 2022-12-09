@@ -7,10 +7,18 @@ of the alteration of the original oxygen isotope composition of biogenic apatite
 
                     JP Flandrois* and C Lecuyer**
                             2023  mk03
-Licence Cecil 2.1
-* Author and maintainer
-** Equations and solution
 
+* Author and maintainer
+** Equations and original idea
+----
+See the corresponding publication:
+"Mitigation of the diagenesis risk in biological apatite δ18O interpretation"
+Christophe Lécuyer(1) and Jean-Pierre Flandrois(2)
+(1)LGL-TPE, CNRS UMR5276, ENSL, Univ Lyon, Univ Lyon 1, Institut Universitaire de France, 43 bd du 11 Novembre 1918, 69622 Villeurbanne, France.
+(2)LBBE, CNRS UMR5558, Univ Lyon, Univ Lyon 1, 43 bd du 11 Novembre 1918, 69622 Villeurbanne, France.
+----
+The program is made available under the [CeCILL2.1](http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt) licence.
+----
 How it works :
 The risk of not identifying a diagenesis process by using the Normality criteria (-r) is estimated by an iterative Monte-Carlo simulation. Monte Carlo simulation is based on the creation of an array of A/W values taken from a uniform distribution between given threshold values of δ18O. This represents the diversity of the deposit situation and physical state of the biological apatite. The array is composed of subarrays with length corresponding to the number n of samples in a sample set. Typically 100,000 sets of length n are simulated. The second phase uses equation (4) to compute the δ18O in biological apatite δ18OAf at the equilibrium on each item of the whole array given the temperature T, initial δ18O in biological apatite (δ18OAi) and the δ18O in water δ18OWi. (These two steps may be repeated once, using the array issued from the previous computation (the array of δ18OAf values) as initial value of δ18OA with different values of A/W, δ18OWi and T.) The resulting δ18OAf array is then optionnaly used to simulate the analytical uncertainty by using Normal law random sampling whose mean being the individal δ18OAf and given standard deviation (default 0.05). Finaly each subarray representing a sample set of lenth n of δ18OAf values is submitted to the normality tests. Shapiro-Wilk and the Anderson-Darling are combined. Both have demonstrated a high potential in normality detection, but they are using different approaches and have different sensitivity to skew and tails. Normality is rejected if anyone test reject it at the given risk α. The number of sets in the array were normality cannot be rejected is computed. The result is expressed as a percentage of the number of sample sets. As Normality is unexpected from the construction but may arise by chance (and the shorter the sample, the higher the chance ), this is the MC estimated risk of the sample strategy with sets of length n. Lastly, a bootstrap (BT) estimator of the mean and standard deviation is computed. The whole simulation is done iteratively with increasing values for the length of the sets with given limits for the exploration and the parameters described in a file using the yaml format.
 
@@ -333,7 +341,7 @@ def MC_run(proto,fileIs):
     if args.Risk or args.xRepeatedMC:
         with open(fileIs, "w") as UserResu: pass #emptying
     with open(fileIs, "a") as UserResu:
-        UserResu.write("#####################################  ApaOxIS ###################################################\n")
+        UserResu.write("#####################################  ApaOxIRA ###################################################\n")
         UserResu.write("          MC simulation of evolution of δ18O in apatite during diagenesis\n")
         UserResu.write("                       C. Lécuyer & JP. Flandrois 2021\n")
         UserResu.write("<reference of the paper>\n<reference of the program repository>\n")
@@ -383,14 +391,14 @@ def MC_run(proto,fileIs):
         
         if len(listNbSamples)>1 and not args.xRepeatedMC:
             plt.plot(listNbSamples,listStdBTestimated,"_k")
-            plt.title("ApaOxIS Risk assessment for a samples set")
+            plt.title("ApaOxIRA Risk assessment for a samples set")
             plt.ylabel('Estimated mean and 95% Confidence interval')
             plt.xlabel('Nb of samples')
             plt.plot(listNbSamples,listMeanBTestimated,".r")
             plt.savefig(fileIs+".graphRisk.pdf")
             print("and graph output is HERE ==> "+fileIs+".graphRisk.pdf")
             #plt.show()
-        print("\n\n##################################  ApaOxIS END ##################################################\n")
+        print("\n\n##################################  ApaOxIRA END ##################################################\n")
     return MCarray,i,EstMean,EstStd
 
 
@@ -426,7 +434,7 @@ def multiMCstatistics(DirIs, fileout,tjob0):
     """
     with open(fileout, "w") as UserResu: pass #emptying
     with open(fileout, "a") as UserResu:
-        UserResu.write("#####################################  ApaOxIS ###################################################\n")
+        UserResu.write("#####################################  ApaOxIRA ###################################################\n")
         
         UserResu.write("                    Normality tests according of bio-apatite                                      \n")
         UserResu.write("                       C. Lécuyer & JP. Flandrois 2021\n")
@@ -466,7 +474,7 @@ def multiMCstatistics(DirIs, fileout,tjob0):
             
             
         plt.plot(Echelle,Std,"_k")
-        plt.title("Repetitions of the ApaOxIS Monte Carlo : \nRisk assessment and samples number")
+        plt.title("Repetitions of the ApaOxIRA Monte Carlo : \nRisk assessment and samples number")
         plt.ylabel("Mean and 95% Confidence interval")
         plt.xlabel("Number of samples")
         plt.plot(Echelle,Data,".k")
@@ -477,7 +485,7 @@ def multiMCstatistics(DirIs, fileout,tjob0):
         plt.savefig(fileout+".Graphe.pdf")
         tjob2 = time.time()
         UserResu.write("Time to final results : {:.2f} seconds".format(tjob2-tjob0))
-        UserResu.write("Individual results are in the directory : ApaOxIS_workplace")
+        UserResu.write("Individual results are in the directory : ApaOxIRA_workplace")
         UserResu.write("\n#################################################################################################\n")
         print ("##### Time to final results : {:.2f} #####".format(float(tjob2-tjob0)))
         print("\n\n############################# THE RESULTS ARE READY  #############################################\n")
@@ -591,15 +599,15 @@ def UserStatistics(dataUser,fileIs):
     Note that there are 3 levels for outputs : screen (extensive and ugly), text file (extensive with explainations and some formating), graphic summary (a summary of course)
     """
     #global UserResu #to be used elsewer to write the result, easier to declare a global variable
-    print("\n\n#####################################  ApaOxIS ###################################################\n")
+    print("\n\n#####################################  ApaOxIRA ###################################################\n")
     print("\n\n###############################  NORMALITY STATISTICS ############################################\n")
     with open(fileIs, "w") as UserResu: pass #emptying if redoing the analysis do not add the results to the file
     with open(fileIs, "a") as UserResu:
-        UserResu.write("#####################################  ApaOxIS ###################################################\n\n")
+        UserResu.write("#####################################  ApaOxIRA ###################################################\n\n")
         
         UserResu.write("                    Normality tests according of bio-apatite contents                                     \n")
         UserResu.write("                       C. Lécuyer & JP. Flandrois 2021\n\n")
-        UserResu.write("Publication: A statistical toolbox designed to help detecting the alteration of the original oxygen \nisotope composition of bioapatites C. Lécuyer & JP. Flandrois 2022\n<reference of the program repository>\n\n")
+        UserResu.write("Publication: A statistical toolbox designed to help detecting the alteration of the original oxygen \nisotope composition of bioapatites C. Lécuyer & JP. Flandrois 2023\n<reference of the program repository>\n\n")
         UserResu.write("\n###################################  RESULTS  ###################################################\n\n")
         UserResu.write("for the submitted sample: "+dataUser+" \n")
         UserResu.write("\n#################################################################################################\n\n")
@@ -896,7 +904,7 @@ def UserStatistics(dataUser,fileIs):
         ax3.text(0.01, 0.25,"RISK ESTIMATION (Monte-Carlo diagenesis in-silico "+str(MCnb)+" iterations), sample count: "+str(Nb_poputest),horizontalalignment='left',verticalalignment='center',transform = ax3.transAxes)
         ax3.text(0, 0.15,"Mean and Std.Dev. estimated by the bootstrap method",horizontalalignment='left',verticalalignment='center',transform = ax3.transAxes)
         ax3.text(0, 0.10,riskline2,horizontalalignment='left',verticalalignment='center',fontweight='semibold',transform = ax3.transAxes)
-        ax3.text(0, 0.00,"Computed with ApaOsIS C. Lécuyer & JP. Flandrois 2022",horizontalalignment='left',verticalalignment='center',transform = ax3.transAxes)
+        ax3.text(0, 0.00,"Computed with ApaOxIRA C. Lécuyer & JP. Flandrois 2023",horizontalalignment='left',verticalalignment='center',transform = ax3.transAxes)
         #ax3.text(0, 0.01,"A statistical toolbox designed to help detecting the diagenesis...",horizontalalignment='left',verticalalignment='center',transform = ax3.transAxes)
         ax3.axis('off')
         plt.subplots_adjust(left=0.1,
@@ -910,7 +918,7 @@ def UserStatistics(dataUser,fileIs):
         
         print("You will find it HERE ==> the results as a text file:"+fileIs+"\nthe histogram:"+fileIs+".histogram.pdf"+"\nthe data fitted to a Normal law:"+fileIs+".fittingNormal.pdf"+"\nthe QQ-plot representation"+fileIs+".qqplot.pdf")
         print("                                                                         ")
-        print("\n\n##################################  ApaOxIS END ##################################################\n")
+        print("\n\n##################################  ApaOxIRA END ##################################################\n")
         
 def stop(valeur='\n-------------------\nPROGRAM ABORTED'):
     #a very primitive error-catching during the debugging
@@ -920,9 +928,9 @@ def stop(valeur='\n-------------------\nPROGRAM ABORTED'):
     
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser(prog="ApaOxIS",description='''
-    APAtite OXygen Isotope Simulation (a toolbox)
-    ApaOxIS has been designed to
+    parser = argparse.ArgumentParser(prog="ApaOxIRA",description='''
+    APAtite OXygen Isotope Risk Analysis (a toolbox)
+    ApaOxIRA has been designed to
     1) help to improve the sampling strategy when working with δ18O in biological apatites, it uses Monte-Carlo simulation of the alteration of the original oxygen isotope composition of biogenic apatites (-m) to compute an estimation of the risk to observe a normally distributed sample by chance
     2) run the normality test of δO18 apatite data (-s) by using the same method as in (1) and the risk to observe a normally distributed sample by chance for the number of samples.
     ''',
@@ -930,7 +938,7 @@ if __name__ == "__main__":
     place our references here (paper, site...)
     """)
 
-    #print("\n\n#####################################  ApaOxIS ###################################################\n")
+    #print("\n\n#####################################  ApaOxIRA ###################################################\n")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-r", "--Risk", action='store_true', help="Monte-Carlo Simulation of sampling scheme (sample size) -output as error rate for a given sampling scheme-")
     group.add_argument("-x", "--xRepeatedMC", action='store_true', help="30x Repeated Monte-Carlo Simulation Simulation of sampling scheme (sample size) final graph on the collected results")
@@ -941,17 +949,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     #print (args)
     if args.Risk:
-        print("\n\n#####################################  ApaOxIS ###################################################\n")
+        print("\n\n#####################################  ApaOxIRA ###################################################\n")
         MC_run(args.i,args.o)
     if args.xRepeatedMC:
-        print("\n\n#####################################  ApaOxIS ###################################################\n")
+        print("\n\n#####################################  ApaOxIRA ###################################################\n")
         tjob0 = time.time()
         #  for the publication statistics only. Usualy not used
         #creation of a result directory
-        createFolder("ApaOxIS_workplace")
-        WAPfile=os.path.join("ApaOxIS_workplace","tempo")
+        createFolder("ApaOxIRA_workplace")
+        WAPfile=os.path.join("ApaOxIRA_workplace","tempo")
         for i in range(0,30): #for the publication statistics
             MC_run(args.i,WAPfile+str(i))
-        multiMCstatistics("ApaOxIS_workplace", args.o,tjob0)
+        multiMCstatistics("ApaOxIRA_workplace", args.o,tjob0)
     if  args.Normality:
         UserStatistics(args.i,args.o)

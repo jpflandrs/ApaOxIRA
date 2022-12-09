@@ -1,22 +1,36 @@
-#               Mitigation of the diagenesis risk in biological apatite δ18O interpretation
-#                               Christophe Lécuyer and Jean-Pierre Flandrois
-#                                               2022
-#
+#   Summary : This is the companion file for
+#                                           ApaOxIRA
+# A Monte-Carlo simulation of the alteration of the original oxygen isotope composition of biogenic apatites
+#   ----
+#   See the corresponding publication:
+#   "Mitigation of the diagenesis risk in biological apatite δ18O interpretation"
+#               Christophe Lécuyer(1) and Jean-Pierre Flandrois(2)
+#   (1)LGL-TPE, CNRS UMR5276, ENSL, Univ Lyon, Univ Lyon 1, Institut Universitaire de France, 43 bd du 11 Novembre 1918, 69622 Villeurbanne, France.
+#   (2)LBBE, CNRS UMR5558, Univ Lyon, Univ Lyon 1, 43 bd du 11 Novembre 1918, 69622 Villeurbanne, France.
+#   ----
+#                  This file may be read and modified in a basic text editor, but it is far better to use a more adapted editor like
+#                                               Mac OS: BBEedit (or even better Xcode)
+#                                               Linux : medit
+#                                               Windows : notepad++
+#   ----
+#   The program is made available under the [CeCILL2.1](http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt) licence.
+#   ----
+
 #
 ###########################
 #  GENERAL CONSIDERATIONS
 ###########################
-# ApaOxIS estimate the risk of considering biological apatite δ18O data (essentially in thanatocenoses) being exempt of a diagenesis effect
+# ApaOxIRA estimate the risk of a false interpretation when considering biological apatite δ18O data (essentially in thanatocenoses) being exempt of a diagenesis effect
 # In condition of sedimentary deposits in short time and limited space the distribution of biological apatite δ18O data is expected to be issued from a  population following a Normal Law (H0). But if the samples have been submitted to a diagenesis process the distribution of biological apatite δ18O data do not fit to a Normal Law (blurred signal).
 #   -> If the observed apatite δ18O are _not_ following a Normal distribution, there is (following the H0 definition) either a) a diagenesis process or b) the spatio-temporal event that has given the deposit does not correspond to a suffisently limited time or space to allows the Normal Law hypothesis.
-#   -> If the biological apatite δ18O data are issued from a Normal distribution, the thanatocenose and the absence of diagenesis is expected but unfortunately the Normal distribution _may have been observed only by chance_, and this is heavilly dependant of the number of samples. ApaOxSis enables to compute the proportion of such "Normal distribution by chance" for a sample of given number within a original population submitted to diagenesis. It estimate the risk level to _disagree with H0_ even if a Normal distribution is observed (risk of over-interpretation). ApaOxIS enable to choose an optimal sampling scheme that minimize this risk or to abandon the study before any interpretation if the risk in too important.
+#   -> If the biological apatite δ18O data are issued from a Normal distribution, the thanatocenose and the absence of diagenesis is expected but unfortunately the Normal distribution _may have been observed only by chance_, and this is heavilly dependant of the number of samples. ApaOxSis enables to compute the proportion of such "Normal distribution by chance" for a sample of given number within a original population submitted to diagenesis. It estimate the risk level to _disagree with H0_ even if a Normal distribution is observed (risk of over-interpretation). ApaOxIRA enable to choose an optimal sampling scheme that minimize this risk or to abandon the study before any interpretation if the risk in too important.
 
 ###########################
 #    HOW TO USE
-#   ApaOxISnnn.py
+#   ApaOxIRA.py
 ###########################
 # launching the program like this :
-#               python3 ApaOxISnnn.py -r parameters.yaml resultsFile output_file
+#               python3 ApaOxIRA.py -r parameters.yaml resultsFile output_file
 
 #parameters.yaml is _this file_ (any name) remember that YAML is a human-readable data serialization language where identation and white-spaces are signifiant
 
@@ -35,10 +49,10 @@
 #  -s, --Temperature  User data are given, output is made of several files concerning statistics and the estimated level of risk of over-interpretation
 #
 # exemples
-# python3.11 ApaOxISnnn.py -r parameters.yaml resultsFile : "parameters.yaml" = this file; the output, here "resultsFile", is a table linking the number of samples to the risk of over-interpretation.
-# python3.11 ApaOxISnnn.py -x parameters.yaml resultsFile : "parameters.yaml" = this file; the output, here "resultsFile" looks in -r but repeated 30 times for estimation of the potential variations
-# python3.11 ApaOxISnnn.py -x User_data resultsFile : "User_data" = one column table of apatite δ18O, the output,here "resultsFile", is a study of the Normality of the biological apatite δ18O data and the risk level corresponding to the sample number.
-# --- Note --- that ApaOxIS is written in python3 and that the optimal version of python is > 3.10: python3.11 is 10% more rapid than python3.10!
+# python3.11 ApaOxIRA.py -r parameters.yaml resultsFile : "parameters.yaml" = this file; the output, here "resultsFile", is a table linking the number of samples to the risk of over-interpretation.
+# python3.11 ApaOxIRA.py -x parameters.yaml resultsFile : "parameters.yaml" = this file; the output, here "resultsFile" looks in -r but repeated 30 times for estimation of the potential variations
+# python3.11 ApaOxIRA.py -x User_data resultsFile : "User_data" = one column table of apatite δ18O, the output,here "resultsFile", is a study of the Normality of the biological apatite δ18O data and the risk level corresponding to the sample number.
+# --- Note --- that ApaOxIRA is written in python3 and that the optimal version of python is > 3.10: python3.11 is 10% more rapid than python3.10!
 
 ###########################
 #    HOW IT WORKS

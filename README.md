@@ -79,16 +79,18 @@ ApaOxIRA enables:
 *  -r, --Water       : Computes the table linking the number of samples to the risk of over-interpretation
 *  -x, --Apatite     : Same as -r but repeated 30 times
 *  -s, --Temperature : User data are given, output is made of several files concerning statistics and the estimated level of risk of over-interpretation
-#
-### exemples
+
+### Other explanations 
+There are also explanations in the MODELO18parameters.yaml file.
+### exemples of use
 
 #### Table of over-interpretation Risk with sample size
 
 ``python3.11 ApaOxIRA.py -r parameters.yaml resultsFiles``
 ``python3.11 ApaOxIRA.py -x parameters.yaml resultsFiles``
 
-* parameters.yaml a file containing the parameters of the model and some concerning the computer
-* here "resultsFile", contains a table (as csv) linking the number of samples to the risk of over-interpretation:
+* parameters.yaml a file containing the parameters of the model and some concerning the computer, see the original `O18parameters.yaml` file
+* here "resultsFile", will be a text file that contains a table (as csv) linking the number of samples to the risk of over-interpretation:
         
         Nb_Samples;Risk_Level %;std
         50 ; 41.3 ; 0.114 
@@ -98,7 +100,7 @@ ApaOxIRA enables:
 * There is also a graphical output.
 
 #### Analysis of experimental data
-Statistical (option -s) analysis of experimental data: 
+
 ``python3.11 ApaOxIRA.py -s sampleData.txt resultsName ``
 
 * "sampleData.txt" = one column table of apatite δ18O values
@@ -107,6 +109,7 @@ Statistical (option -s) analysis of experimental data:
     * The normality tests (Shapiro-Wilk, Anderson-Darling) are used and a joined normality test is computed that enable us to detect or reject normality. 
     * The interpretation criteria being that of the MC simulation parameters, the results may be compared to the MC simulation. MC simulation performed for the given number of samples and basic parameters give us the _risk_ of getting a normal distributed population by chance after diagenesis. 
     * Additionaly an histogram, the adjusted Normal law and the quantile-quantile plot is also returned.
+    * Note that the model parameters my not be adapted to your specific problem but you may change 
     
 ##### Typical result file
     
