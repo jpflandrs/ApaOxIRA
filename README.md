@@ -170,7 +170,7 @@ There are also explanations in the MODELO18parameters.yaml file.
         * Primary MC simulation *Temperature :15
         Initial δ18O Water: -8.0
         Initial δ18O Apatite: 20.0
-        A/W ratio range: 0.05-0.95
+        W/A ratio range: 0.05-0.95
         Number of samples: 100
         
         Simulation of the lab process, sigma: 0.05
@@ -189,9 +189,9 @@ ApaOxIS is written in python3 and that the optimal version of python is > 3.10: 
 
 The risk of not identifying a diagenesis process by using the Normality criteria (option -r) is estimated by an iterative Monte-Carlo simulation. 
 
-Monte Carlo (MC) simulation is based on the creation of an array of A/W values taken from a uniform distribution between given threshold values of δ18O. This represents the diversity of the deposit situation and physical state of the biological apatite. The array is composed of subarrays with length corresponding to the number n of samples in a sample set. Typically 100,000 sets of length n are simulated. 
+Monte Carlo (MC) simulation is based on the creation of an array of W/A values taken from a uniform distribution between given threshold values of δ18O. This represents the diversity of the deposit situation and physical state of the biological apatite. The array is composed of subarrays with length corresponding to the number n of samples in a sample set. Typically 100,000 sets of length n are simulated. 
 
-The second phase uses equation (4) to compute the δ18O in biological apatite δ18OAf at the equilibrium on each item of the whole array given the temperature T, initial δ18O in biological apatite (δ18OAi) and the δ18O in water δ18OWi. These two steps may be repeated once, using the array issued from the previous computation (the array of δ18OAf values) as initial value of δ18OA with different values of A/W, δ18OWi and T.) 
+The second phase uses equation (4) to compute the δ18O in biological apatite δ18OAf at the equilibrium on each item of the whole array given the temperature T, initial δ18O in biological apatite (δ18OAi) and the δ18O in water δ18OWi. These two steps may be repeated once, using the array issued from the previous computation (the array of δ18OAf values) as initial value of δ18OA with different values of W/A, δ18OWi and T.) 
 
 The resulting δ18OAf array is then optionnaly used to simulate the analytical uncertainty by using Normal law random sampling whose mean being the individal δ18OAf and given standard deviation (default 0.05). 
 

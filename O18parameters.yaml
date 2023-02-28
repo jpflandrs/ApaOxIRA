@@ -86,8 +86,8 @@ parameterdictionary0 :      #dont change the name
     d18OWi: -8.0        #Initial δ18O for water, float
     d18OAi: 20.0        #Initial δ18O for apatite, float
     alpha: 0.05         #the alpha value used to interpretate the statistics, float. Better to use 0.05
-    WAlow: 0.05          #the lower A/W ratio during the simulation, float AWlow > 0
-    WAhigh: 0.95         #the higher A/W ratio during the simulation, float AWhigh < 1
+    WAlow: 0.05          #the lower W/A ratio during the simulation, float WAlow > 0
+    WAhigh: 0.95         #the higher W/A ratio during the simulation, float WAhigh < 1
 
 ############################
 #        OPTIONS
@@ -106,8 +106,8 @@ parameterdictionary1 :      #dont change the name
                             #Note that alpha, arraysize and sampleNB are not changing
     T1: 40               #Temperature (C°) during the second diagenesis process, positive integer
     d18OWi1: -8.0        #Initial δ18O for water, float
-    WAlow1: 0.1          #the lower A/W ratio during the simulation, float AWlow > 0
-    WAhigh1: 0.5         #the higher A/W ratio during the simulation, float AWhigh < 1
+    WAlow1: 0.1          #the lower W/A ratio during the simulation, float WAlow > 0
+    WAhigh1: 0.5         #the higher W/A ratio during the simulation, float WAhigh < 1
 
 
 ############################
