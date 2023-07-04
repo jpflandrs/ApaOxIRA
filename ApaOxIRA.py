@@ -345,7 +345,11 @@ def MC_run(proto,fileIs):
         UserResu.write("          MC simulation of evolution of δ18O in apatite during diagenesis\n")
         UserResu.write("                       C. Lécuyer & JP. Flandrois 2021\n")
         UserResu.write("<reference of the paper>\n<reference of the program repository>\n")
-        UserResu.write("\n###################################  RESULTS  ###################################################\n(you may copy the results to any place as csv)\n\n")
+        UserResu.write("\n######### Estimation of the Risk to get a Normal Population Only by Chance #########################\n")
+        UserResu.write("This is an estimation of the risk to get a Normal population only by chance for a sampling sheme (number of samples):\n the idea is to use a sampling scheme that minimize the risk to get a Normal population only by chance.\n")
+        UserResu.write("[Risk_Level %] is an estimation of the percentage of wrongly taking the population as a Normal one\n")
+        UserResu.write("[std] is the standard deviation of the estimation\n")
+        UserResu.write("\n###################################  Results  ###################################################\n(you may copy the results to any place as csv if needed)\n\n")
         UserResu.write("Nb_Samples"+";"+"Risk_Level %"+";"+"std"+"\n")
         print("\n\n##################################  MC SIMULATION ################################################\n")
         listNbSamples=[]
@@ -390,10 +394,14 @@ def MC_run(proto,fileIs):
         print("                                                                         ")
         
         if len(listNbSamples)>1 and not args.xRepeatedMC:
-            plt.plot(listNbSamples,listStdBTestimated,"_k")
-            plt.title("ApaOxIRA Risk assessment for a samples set")
-            plt.ylabel('Estimated mean and 95% Confidence interval')
-            plt.xlabel('Nb of samples')
+            #plt.plot(listNbSamples,listStdBTestimated,"_k")
+            plt.figure(figsize=(7,7))
+            #plt.xlim(0, 3)
+            plt.locator_params(axis='y', nbins=20)
+  
+            plt.title("ApaOxIRA Risk assessment for a set of samples")
+            plt.ylabel('Risk (%) of incorrectly assuming a normal distribution')
+            plt.xlabel('Number of samples')
             plt.plot(listNbSamples,listMeanBTestimated,".r")
             plt.savefig(fileIs+".graphRisk.pdf")
             print("and graph output is HERE ==> "+fileIs+".graphRisk.pdf")

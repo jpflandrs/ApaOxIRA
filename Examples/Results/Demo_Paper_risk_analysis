@@ -1,0 +1,81 @@
+#####################################  ApaOxIRA ###################################################
+          MC simulation of evolution of δ18O in apatite during diagenesis
+                       C. Lécuyer & JP. Flandrois 2021
+<reference of the paper>
+<reference of the program repository>
+
+######### Estimation of the Risk to get a Normal Population Only by Chance #########################
+This is an estimation of the risk to get a Normal population only by chance for a sampling sheme (number of samples):
+ the idea is to use a sampling scheme that minimize the risk to get a Normal population only by chance.
+[Risk_Level %] is an estimation of the percentage of wrongly taking the population as a Normal one
+[std] is the standard deviation of the estimation
+
+###################################  Results  ###################################################
+(you may copy the results to any place as csv if needed)
+
+Nb_Samples;Risk_Level %;std
+10 ; 85.5 ; 0.0672 
+12 ; 81.8 ; 0.0552 
+14 ; 77.7 ; 0.0527 
+16 ; 73.4 ; 0.0649 
+18 ; 69.0 ; 0.0663 
+20 ; 64.7 ; 0.0756 
+22 ; 60.3 ; 0.0795 
+24 ; 55.9 ; 0.072 
+26 ; 51.4 ; 0.0846 
+28 ; 46.9 ; 0.0764 
+30 ; 42.6 ; 0.0768 
+32 ; 38.5 ; 0.0769 
+34 ; 34.6 ; 0.0651 
+36 ; 30.8 ; 0.0742 
+38 ; 27.2 ; 0.0724 
+40 ; 24.1 ; 0.0636 
+42 ; 21.0 ; 0.0522 
+44 ; 18.3 ; 0.0524 
+46 ; 16.0 ; 0.0497 
+48 ; 13.7 ; 0.0548 
+50 ; 11.7 ; 0.0578 
+52 ; 10.0 ; 0.0458 
+54 ; 8.45 ; 0.0408 
+56 ; 7.13 ; 0.0397 
+58 ; 6.01 ; 0.0381 
+60 ; 5.0 ; 0.0381 
+62 ; 4.21 ; 0.0316 
+64 ; 3.48 ; 0.0238 
+66 ; 2.84 ; 0.0218 
+68 ; 2.29 ; 0.0249 
+70 ; 1.9 ; 0.0243 
+72 ; 1.54 ; 0.0182 
+74 ; 1.26 ; 0.0181 
+76 ; 1.01 ; 0.0137 
+78 ; 0.816 ; 0.0142 
+80 ; 0.656 ; 0.0128 
+82 ; 0.537 ; 0.00953 
+84 ; 0.416 ; 0.0102 
+86 ; 0.331 ; 0.00983 
+88 ; 0.259 ; 0.00761 
+90 ; 0.216 ; 0.00692 
+
+
+
+############################# PARAMETERS OF THE  MC SIMULATION ##################################
+
+* General conditions *
+Number of simulations : 500000
+Admittted risk for p value :0.05
+
+* Primary MC simulation *Temperature :15
+Initial δ18O Water: -8.0
+Initial δ18O Apatite: 20.0
+W/A ratio range: 0.05-0.95
+Number of samples: 10
+
+Simulation of the lab process, sigma: 0.05
+
+* Increase of the number of samples by steps *
+number of steps: 40
+level of the step: 2
+
+The adapted number of simulated conditions were: 560000 and computing was done on 14 threads in parallel
+Time to results : 306.71 seconds
+#################################################################################################
