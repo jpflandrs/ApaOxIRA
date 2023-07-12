@@ -1,0 +1,86 @@
+#####################################  ApaOxIRA ###################################################
+
+                    Normality tests according of bio-apatite contents                                     
+                       C. Lécuyer & JP. Flandrois 2021
+
+Publication: A statistical toolbox designed to help detecting the alteration of the original oxygen 
+isotope composition of bioapatites C. Lécuyer & JP. Flandrois 2023
+<reference of the program repository>
+
+
+###################################  RESULTS  ###################################################
+
+for the submitted sample: Examples/Aguilera_et_al_2017.txt 
+
+#################################################################################################
+
+## BASIC STATISTICS
+
+* Number of samples:  62 
+ * Mean: 19.756 
+ * Variance: 0.177 
+ 
+ ---- 
+ * Skew: 0.184 test statistics z-score: 0.646 p-value: 0.518  H0 (skew from a normal distrib.) cannot be rejected 
+    **  The data are moderately skewed !
+ ---- 
+ * Kurtosis -0.075 test: z-score: 0.940 p-value: 0.518 H0 (normal distrib.) cannot be rejected
+    **  The distribution is moderately flat !!
+
+## NORMALITY TESTS 
+
+[The null hypothesis HO is that the observed distribution follows the Normal (gaussian) model
+i.e the sample was drawn from a normal distribution]
+
+Departure from normality due to skewness or kurtosis is more taken into account with the Shapiro-Wilk (SW) test,
+the Aderson-Darling (AD) test is much sensitive to tail.
+                
+Shapiro-Wilk
+     statistics: 0.986 p-value: 0.679 H0 (normal distrib.) cannot be rejected 
+                 
+Anderson-Darling
+     statistics: 0.287 critical value α: 0.744 H0 (normal distrib.) cannot be rejected 
+ 
+## CONVERGENCE OF THE NORMALITY TESTS
+
+All the normality tests are convergent: the sample seems issued from a Normal distributed population
+This is certainly clear with the graph of the data fitted to a Normal law:Examples/Results/Aguilera.fittingNormal.pdf and the QQ-plot representationExamples/Results/Aguilera.qqplot.pdf
+COMPUTING THE CORRESPONDING RISK FOR 62 SAMPLES ... 
+
+#####################################  ApaOxIRA ###################################################
+          MC simulation of evolution of δ18O in apatite during diagenesis
+                       C. Lécuyer & JP. Flandrois 2021
+<reference of the paper>
+<reference of the program repository>
+
+######### Estimation of the Risk to get a Normal Population Only by Chance #########################
+This is an estimation of the risk to get a Normal population only by chance for a sampling sheme (number of samples):
+ the idea is to use a sampling scheme that minimize the risk to get a Normal population only by chance.
+[Risk_Level %] is an estimation of the percentage of wrongly taking the population as a Normal one
+[std] is the standard deviation of the estimation
+
+###################################  Results  ###################################################
+(you may copy the results to any place as csv if needed)
+
+Nb_Samples;Risk_Level %;std
+62 ; 4.17 ; 0.0429 
+
+
+
+############################# PARAMETERS OF THE  MC SIMULATION ##################################
+
+* General conditions *
+Number of simulations : 250000
+Admittted risk for p value :0.05
+
+* Primary MC simulation *Temperature :15
+Initial δ18O Water: -8.0
+Initial δ18O Apatite: 20.0
+W/A ratio range: 0.05-0.95
+Number of samples: 100
+
+Simulation of the lab process, sigma: 0.05
+
+The adapted number of simulated conditions were: 280000 and computing was done on 14 threads in parallel
+Time to results : 2.76 seconds
+#################################################################################################
